@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meru University Health Tracker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #006400; /* Meru University green */
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 0;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        nav {
+            background-color: #044404; /* Lighter green for navigation */
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.2rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #0915be;
+            border-bottom: 2px solid #1f06b3;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background: #006400;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #228B22;
+        }
+        #chart {
+            width: 100%;
+            height: 300px;
+            margin: 1rem 0;
+        }
+        .community-post {
+            border-bottom: 1px solid #ccc;
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+        }
+        footer {
+            background-color: #006400;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meru University Health Tracker</h1>
+        <p>Empower Your Wellness, Thrive Academically</p>
+    </header>
+
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#log-health">Log Health</a>
+        <a href="#trends">Trends</a>
+        <a href="#community">Community</a>
+        <a href="#settings">Settings</a>
+        <a href="#resources">Resources</a>
+    </nav>
+
+    <div class="container">
+        <!-- Dashboard Section -->
+        <div class="section" id="dashboard">
+            <h2>Health Dashboard</h2>
+            <p>Welcome, Waweru! Here's your health summary for today:</p>
+            <ul>
+                <li><b>Steps:</b> 5,000 / 10,000 goal</li>
+                <li><b>Sleep:</b> 6 hours / 8 hours goal</li>
+                <li><b>Mood:</b> Stressed</li>
+                <li><b>Water Intake:</b> 1.5 liters / 2 liters goal</li>
+                <li><b>Stress Level:</b> High</li>
+                <li><b>Last Exercise:</b> 30-minute jog (yesterday)</li>
+            </ul>
+            <p><b>Recommendation:</b> Try a 10-minute meditation to reduce stress.</p>
+        </div>
+
+        <!-- Log Health Section -->
+        <div class="section" id="log-health">
+            <h2>Log Your Health</h2>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" value="2025-03-02">
+            </div>
+            <div class="form-group">
+                <label for="steps">Steps Taken</label>
+                <input type="number" id="steps" placeholder="e.g., 5000">
+            </div>
+            <div class="form-group">
+                <label for="sleep">Hours of Sleep</label>
+                <input type="number" id="sleep" placeholder="e.g., 7" step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="water">Water Intake (liters)</label>
+                <input type="number" id="water" placeholder="e.g., 2" step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="mood">Mood</label>
+                <select id="mood">
+                    <option value="Happy">Happy</option>
+                    <option value="Stressed">Stressed</option>
+                    <option value="Tired">Tired</option>
+                    <option value="Anxious">Anxious</option>
+                    <option value="Neutral">Neutral</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="stress">Stress Level (1-10)</label>
+                <input type="number" id="stress" min="1" max="10" placeholder="e.g., 5">
+            </div>
+            <div class="form-group">
+                <label for="exercise">Exercise (type and duration)</label>
+                <input type="text" id="exercise" placeholder="e.g., 30-minute jog">
+            </div>
+            <div class="form-group">
+                <label for="nutrition">Nutrition Notes</label>
+                <textarea id="nutrition" placeholder="e.g., Ate 3 meals, 2 fruits, drank 2 liters of water"></textarea>
+            </div>
+            <button onclick="logHealth()">Log Health</button>
+        </div>
+
+        <!-- Trends Section -->
+        <div class="section" id="trends">
+            <h2>Your Health Trends</h2>
+            <p>View your health metrics over the past week:</p>
+            <div id="chart"></div>
+            <p><b>Insights:</b> Your sleep has improved, but stress levels remain high. Try yoga or deep breathing exercises.</p>
+        </div>
+
+        <!-- Community Section -->
+        <div class="section" id="community">
+            <h2>Community Support</h2>
+            <p>Share and learn from anonymous health tips with Meru University students:</p>
+            <div class="form-group">
+                <textarea id="community-post" placeholder="Share a health tip or challenge (anonymous)..."></textarea>
+                <button onclick="postCommunity()">Post</button>
+            </div>
+            <div class="community-post">
+                <p><b>Anonymous:</b> I’ve been feeling stressed before exams—any tips?</p>
+                <p><b>Reply:</b> Try the Pomodoro technique for studying and take short walks!</p>
+            </div>
+            <div class="community-post">
+                <p><b>Anonymous:</b> Drinking more water has helped me stay focused.</p>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="section" id="settings">
+            <h2>Settings</h2>
+            <h3>Notification Preferences</h3>
+            <div class="form-group">
+                <label for="reminder-time">Reminder Time</label>
+                <input type="time" id="reminder-time">
+            </div>
+            <div class="form-group">
+                <label for="reminder-type">Reminder Type</label>
+                <select id="reminder-type">
+                    <option value="Water">Drink Water</option>
+                    <option value="Exercise">Exercise</option>
+                    <option value="Sleep">Sleep Reminder</option>
+                    <option value="Break">Take a Break</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="frequency">Frequency</label>
+                <select id="frequency">
+                    <option value="Daily">Daily</option>
+                    <option value="Hourly">Hourly</option>
+                    <option value="Weekly">Weekly</option>
+                </select>
+            </div>
+            <button onclick="setReminder()">Set Reminder</button>
+            <h3>Account Settings</h3>
+            <p><a href="#update-profile">Update Profile</a> | <a href="#logout">Logout</a></p>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="section" id="resources">
+            <h2>Health Resources</h2>
+            <p>Explore these resources for better health:</p>
+            <ul>
+                <li><b>Meru University Health Services:</b> Visit the campus clinic for check-ups (Mon-Fri, 8 AM - 5 PM).</li>
+                <li><b>Mental Health Support:</b> Contact our counselors at counseling@meru.ac.ke.</li>
+                <li><b>Exercise Classes:</b> Join free yoga sessions every Wednesday at the sports complex.</li>
+                <li><b>Nutrition Tips:</b> Check out our guide on balanced diets for students.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Meru University Health Tracker. All rights reserved. | Empowering Wellness</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function logHealth() {
+            let data = {
+                date: document.getElementById('date').value,
+                steps: document.getElementById('steps').value,
+                sleep: document.getElementById('sleep').value,
+                water: document.getElementById('water').value,
+                mood: document.getElementById('mood').value,
+                stress: document.getElementById('stress').value,
+                exercise: document.getElementById('exercise').value,
+                nutrition: document.getElementById('nutrition').value
+            };
+            fetch('/log_health', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `date=${data.date}&steps=${data.steps}&sleep=${data.sleep}&water=${data.water}&mood=${data.mood}&stress=${data.stress}&exercise=${data.exercise}&nutrition=${data.nutrition}`
+            });
+            alert("Health logged successfully!");
+        }
+
+        function setReminder() {
+            let time = document.getElementById('reminder-time').value;
+            let type = document.getElementById('reminder-type').value;
+            let frequency = document.getElementById('frequency').value;
+            fetch('/set_reminder', {
+                method: 'POST',
+                body: `time=${time}&type=${type}&frequency=${frequency}`
+            });
+            alert("Reminder set!");
+        }
+
+        function postCommunity() {
+            let post = document.getElementById('community-post').value;
+            if (post) {
+                alert("Community post submitted anonymously!");
+                // Add post to community section (requires backend)
+            }
+        }
+
+        // Sample chart for trends (replace with actual data from backend)
+        new Chart(document.getElementById('chart'), {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [
+                    { label: 'Sleep (hours)', data: [7, 6, 8, 5, 7, 8, 6], borderColor: '#006400' },
+                    { label: 'Steps', data: [5000, 7000, 6000, 8000, 5500, 9000, 4000], borderColor: '#228B22' }
+                ]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+    </script>
+</body>
+</html>
